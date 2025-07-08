@@ -10,7 +10,7 @@ public class usersystem {
 	}
 	
 	public Connection getConnection() {
-		String ourUrl = "jdbc:mysql://localhost:3306/trainSystem";
+		String ourUrl = "jdbc:mysql://localhost:3306/cs336project";
 		Connection connection = null;
 		
 		try {
@@ -24,7 +24,7 @@ public class usersystem {
 			e.printStackTrace();
 		}
 		try {
-			connection = DriverManager.getConnection(ourUrl,"root", "root");
+			connection = DriverManager.getConnection(ourUrl,"root", "password");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +36,6 @@ public class usersystem {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
