@@ -1,4 +1,7 @@
-CREATE TABLE Stations(
+CREATE DATABASE IF NOT EXISTS cs336projectdb;
+USE cs336projectdb
+
+CREATE TABLE Station(
  station_id CHAR(4) PRIMARY KEY,
  station_name VARCHAR(50) NOT NULL,
  city  VARCHAR(50) NOT NULL,
@@ -11,8 +14,8 @@ transit_name VARCHAR(50) NOT NULL,
 origin_id CHAR(4) NOT NULL,
 dest_id CHAR(4) NOT NULL,
 fare FLOAT NOT NULL,
-FOREIGN KEY (origin_id) REFERENCES Stations(station_id),
-FOREIGN KEY (dest_id) REFERENCES Stations(station_id)
+FOREIGN KEY (origin_id) REFERENCES Station(station_id),
+FOREIGN KEY (dest_id) REFERENCES Station(station_id)
 );
 
 CREATE TABLE Train(
@@ -31,12 +34,12 @@ train_fare FLOAT NOT NULL,
 FOREIGN KEY (transit_id) REFERENCES TransitLine(transit_id)
 );
 
-CREATE TABLE TrainDiscounts (
+CREATE TABLE TrainDiscounts(
 disc_type VARCHAR(20) PRIMARY KEY,
 disc_rate FLOAT NOT NULL 
 );
 
-CREATE TABLE Schedules(
+CREATE TABLE Schedule(
 id CHAR(4) NOT NULL,
 stop_num INT NOT NULL,
 station_id CHAR(4) NOT NULL,
@@ -44,10 +47,10 @@ arrival_datetime  DATETIME NOT NULL,
 departure_datetime DATETIME NOT NULL,
 PRIMARY KEY (id, stop_num),
 FOREIGN KEY (id) REFERENCES TrainSchedule(trainschedule_id),
-FOREIGN KEY (id)  REFERENCES Stations(station_id)
+FOREIGN KEY (id) REFERENCES Station(station_id)
 );
 
-CREATE TABLE Customers(
+CREATE TABLE Customer(
 customer_id CHAR(4) PRIMARY KEY,
 first_name VARCHAR(50) NOT NULL,
 last_name VARCHAR(50) NOT NULL,
@@ -56,7 +59,7 @@ username VARCHAR(50) NOT NULL,
 pass VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE Employees(
+CREATE TABLE Employee(
 ssn CHAR(9) PRIMARY KEY,
 employee_firstname VARCHAR(50) NOT NULL,
 employee_lastname VARCHAR(50) NOT NULL,
@@ -65,7 +68,7 @@ username VARCHAR(50) NOT NULL,
 pass VARCHAR(100) NOT NULL 
 );
 
-CREATE TABLE Reservations( 
+CREATE TABLE Reservation( 
 res_num  INT PRIMARY KEY,
 res_date DATETIME NOT NULL,
 customer_id CHAR(4) NOT NULL,
@@ -75,10 +78,10 @@ dest_id CHAR(4)  NOT NULL,
 departure_datetime DATETIME NOT NULL,
 trip_type VARCHAR(10) NOT NULL, 
 total_fare FLOAT NOT NULL,
-FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
 FOREIGN KEY (id) REFERENCES TrainSchedule(id),
-FOREIGN KEY (origin_id) REFERENCES Stations(origin_id),
-FOREIGN KEY (dest_id)REFERENCES Stations(station_id)
+FOREIGN KEY (origin_id) REFERENCES Station(origin_id),
+FOREIGN KEY (dest_id)REFERENCES Station(station_id)
 );
 
 CREATE TABLE CustomerQuestions(
@@ -86,7 +89,7 @@ ques_id CHAR(4) PRIMARY KEY,
 customer_id CHAR(4) NOT NULL,
 question TEXT NOT NULL,
 question_date DATETIME NOT NULL,
-FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
 );
 
 CREATE TABLE EmployeeReply(
@@ -96,10 +99,10 @@ employee_ssn CHAR(9) NOT NULL,
 reply TEXT NOT NULL,
 reply_date DATETIME NOT NULL,
 FOREIGN KEY (ques_id) REFERENCES CustomerQuestions(ques_id),
-FOREIGN KEY (employee_ssn) REFERENCES Employees(ssn)
+FOREIGN KEY (employee_ssn) REFERENCES Employee(ssn)
 );
 
-INSERT INTO Stations(station_id, station_name, city, state) VALUES
+INSERT INTO Station(station_id, station_name, city, state) VALUES
 ('TRNT','Trenton','Trenton','NJ'),
 ('NYPN','NY Penn Station','New York','NY'),
 ('PRIN','Princeton','Princeton','NJ'),
@@ -123,7 +126,7 @@ INSERT INTO TrainDiscounts(disc_type, disc_rate) VALUES
 ('Senior', 0.35),
 ('Disabled', 0.50);
 
-INSERT INTO Schedules(id, stop_num, station_id, arrival_datetime, departure_datetime) VALUES
+INSERT INTO Schedule(id, stop_num, station_id, arrival_datetime, departure_datetime) VALUES
 ('T123', 1, 'TRNT', '2025-07-22 03:48:00', '2025-07-22 03:48:00'),
 ('T123', 2, 'PRIN', '2025-07-22 04:10:00', '2025-07-22 04:12:00'),
 ('T123', 3, 'NWBR', '2025-07-22 04:25:00', '2025-07-22 04:27:00'),
@@ -131,18 +134,18 @@ INSERT INTO Schedules(id, stop_num, station_id, arrival_datetime, departure_date
 ('T123', 5, 'METC', '2025-07-22 04:55:00', '2025-07-22 04:57:00'),
 ('T123', 6, 'NYPN', '2025-07-22 05:21:00', '2025-07-22 05:21:00');
 
-INSERT INTO Schedules(id, stop_num, station_id, arrival_datetime, departure_datetime) VALUES
+INSERT INTO Schedule(id, stop_num, station_id, arrival_datetime, departure_datetime) VALUES
 ('T456', 1, 'NWBR', '2020-08-10 11:00:00', '2020-08-10 11:00:00'),
 ('T456', 2, 'NYPN', '2020-08-10 11:59:00', '2020-08-10 11:59:00');
 
-INSERT INTO Customers(customer_id, first_name, last_name, email, username, pass) VALUES
+INSERT INTO Customer(customer_id, first_name, last_name, email, username, pass) VALUES
 ('0001', 'John', 'Smith', 'john.smith23@gmail.com', 'jsmith23', 'abc123');
 
-INSERT INTO Employees (ssn, employee_firstname, employee_lastname, employee_role, username, pass) VALUES
+INSERT INTO Employee(ssn, employee_firstname, employee_lastname, employee_role, username, pass) VALUES
 ('123456789','Tom', 'Cruz', 'Manager', 'tcruz24', 'tcruz24'),
 ('012345678','Kobbie', 'Mainoo', 'Employee', 'MUTD13', 'kman23');
 
-INSERT INTO Reservations(res_num, res_date, customer_id, id, origin_id, dest_id, departure_datetime, trip_type, total_fare) VALUES
+INSERT INTO Reservation(res_num, res_date, customer_id, id, origin_id, dest_id, departure_datetime, trip_type, total_fare) VALUES
 (0123, '2020-07-22 00:00:00', '0001', 'T456','NWBR', 'NYPN', '2020-08-10 11:00:00','one-way', 80.00);
 
 INSERT INTO CustomerQuestions(ques_id, customer_id, question, question_date) VALUES
