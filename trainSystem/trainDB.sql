@@ -81,7 +81,7 @@ FOREIGN KEY (origin_id) REFERENCES Stations(origin_id),
 FOREIGN KEY (dest_id)REFERENCES Stations(station_id)
 );
 
-CREATE TABLE CustomerQuestions (
+CREATE TABLE CustomerQuestions(
 ques_id CHAR(4) PRIMARY KEY,
 customer_id CHAR(4) NOT NULL,
 question TEXT NOT NULL,
@@ -89,7 +89,7 @@ question_date DATETIME NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
-CREATE TABLE EmployeeReply (
+CREATE TABLE EmployeeReply(
 reply_id CHAR(4) PRIMARY KEY,
 ques_id CHAR(4) NOT NULL,
 employee_ssn CHAR(9) NOT NULL,
@@ -98,3 +98,55 @@ reply_date DATETIME NOT NULL,
 FOREIGN KEY (ques_id) REFERENCES CustomerQuestions(ques_id),
 FOREIGN KEY (employee_ssn) REFERENCES Employees(ssn)
 );
+
+INSERT INTO Stations(station_id, station_name, city, state) VALUES
+('TRNT','Trenton','Trenton','NJ'),
+('NYPN','NY Penn Station','New York','NY'),
+('PRIN','Princeton','Princeton','NJ'),
+('NWBR','New Brunswick','New Brunswick','NJ'),
+('EDSN','Edison','Edison','NJ'),
+('MTCN','Metuchen','Metuchen','NJ');
+
+INSERT INTO TransitLine(transit_id, transit_name, origin_id, dest_id, fare) VALUES
+('NECO', 'Northeast Corridor', 'NYPN', 'TRNT', 50.00);
+
+INSERT INTO Train(train_id, transit_id) VALUES
+('3806', 'NECO'),
+('2345', 'NECO');
+
+INSERT INTO TrainSchedule(trainschedule_id, transit_id, departure_datetime, arrival_datetime, travel_time, train_fare) VALUES
+('T123', 'NECO', '2020-07-22 03:48:00', '2020-07-22 05:21:00', '2020-07-22 01:33:00', 50.00),
+('T456', 'NECO', '2020-08-10 11:00:00', '2020-08-10 11:59:00', '2020-08-10 00:59:00', 80.00);
+
+INSERT INTO TrainDiscounts(disc_type, disc_rate) VALUES
+('Children (1-11 yrs)', 0.25),
+('Senior', 0.35),
+('Disabled', 0.50);
+
+INSERT INTO Schedules(id, stop_num, station_id, arrival_datetime, departure_datetime) VALUES
+('T123', 1, 'TRNT', '2025-07-22 03:48:00', '2025-07-22 03:48:00'),
+('T123', 2, 'PRIN', '2025-07-22 04:10:00', '2025-07-22 04:12:00'),
+('T123', 3, 'NWBR', '2025-07-22 04:25:00', '2025-07-22 04:27:00'),
+('T123', 4, 'EDIS', '2025-07-22 04:40:00', '2025-07-22 04:42:00'),
+('T123', 5, 'METC', '2025-07-22 04:55:00', '2025-07-22 04:57:00'),
+('T123', 6, 'NYPN', '2025-07-22 05:21:00', '2025-07-22 05:21:00');
+
+INSERT INTO Schedules(id, stop_num, station_id, arrival_datetime, departure_datetime) VALUES
+('T456', 1, 'NWBR', '2020-08-10 11:00:00', '2020-08-10 11:00:00'),
+('T456', 2, 'NYPN', '2020-08-10 11:59:00', '2020-08-10 11:59:00');
+
+INSERT INTO Customers(customer_id, first_name, last_name, email, username, pass) VALUES
+('0001', 'John', 'Smith', 'john.smith23@gmail.com', 'jsmith23', 'abc123');
+
+INSERT INTO Employees (ssn, employee_firstname, employee_lastname, employee_role, username, pass) VALUES
+('123456789','Tom', 'Cruz', 'Manager', 'tcruz24', 'tcruz24'),
+('012345678','Kobbie', 'Mainoo', 'Employee', 'MUTD13', 'kman23');
+
+INSERT INTO Reservations(res_num, res_date, customer_id, id, origin_id, dest_id, departure_datetime, trip_type, total_fare) VALUES
+(0123, '2020-07-22 00:00:00', '0001', 'T456','NWBR', 'NYPN', '2020-08-10 11:00:00','one-way', 80.00);
+
+INSERT INTO CustomerQuestions(ques_id, customer_id, question, question_date) VALUES
+('Q001', '0001', 'How much off do seniors receive?', '2020-07-20 09:15:00');
+
+INSERT INTO EmployeeReply(reply_id, ques_id,  employee_ssn, reply, reply_date) VALUES
+('R001', 'Q001', '123456789', 'Seniors receive 35% off','2020-07-20 10:00:00');
