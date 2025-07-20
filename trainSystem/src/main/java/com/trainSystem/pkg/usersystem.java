@@ -10,7 +10,7 @@ public class usersystem {
 	}
 	
 	public Connection getConnection() {
-		String ourUrl = "jdbc:mysql://localhost:3306/cs336project";
+		String ourUrl = "jdbc:mysql://localhost:3306/cs336projectdb";
 		Connection connection = null;
 		
 		try {

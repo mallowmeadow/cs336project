@@ -79,8 +79,8 @@ departure_datetime DATETIME NOT NULL,
 trip_type VARCHAR(10) NOT NULL, 
 total_fare FLOAT NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
-FOREIGN KEY (id) REFERENCES TrainSchedule(id),
-FOREIGN KEY (origin_id) REFERENCES Station(origin_id),
+FOREIGN KEY (id) REFERENCES TrainSchedule(trainschedule_id),
+FOREIGN KEY (origin_id) REFERENCES TransitLine(origin_id),
 FOREIGN KEY (dest_id)REFERENCES Station(station_id)
 );
 
