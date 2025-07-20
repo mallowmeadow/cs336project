@@ -40,7 +40,7 @@ disc_rate FLOAT NOT NULL
 );
 
 CREATE TABLE Schedule(
-id CHAR(4) PRIMARY KEY,
+id CHAR(4),
 stop_num INT NOT NULL,
 station_id CHAR(4) NOT NULL,
 arrival_datetime  DATETIME NOT NULL,
