@@ -25,7 +25,7 @@ FOREIGN KEY (transit_id) REFERENCES TransitLine(transit_id)
 );
 
 CREATE TABLE TrainSchedule(
-trainschedule_id CHAR(4),
+trainschedule_id CHAR(4) PRIMARY KEY,
 transit_id CHAR(4) NOT NULL,
 departure_datetime DATETIME NOT NULL,
 arrival_datetime DATETIME NOT NULL,
@@ -40,7 +40,7 @@ disc_rate FLOAT NOT NULL
 );
 
 CREATE TABLE Schedule(
-id CHAR(4) NOT NULL,
+id CHAR(4) NOT NULL PRIMARY KEY,
 stop_num INT NOT NULL,
 station_id CHAR(4) NOT NULL,
 arrival_datetime  DATETIME NOT NULL,
