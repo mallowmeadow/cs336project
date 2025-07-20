@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS cs336projectdb;
-USE cs336projectdb
+USE cs336projectdb;
 
 CREATE TABLE Station(
  station_id CHAR(4) PRIMARY KEY,
@@ -153,3 +153,16 @@ INSERT INTO CustomerQuestions(ques_id, customer_id, question, question_date) VAL
 
 INSERT INTO EmployeeReply(reply_id, ques_id,  employee_ssn, reply, reply_date) VALUES
 ('R001', 'Q001', '123456789', 'Seniors receive 35% off','2020-07-20 10:00:00');
+
+/* helper VIEWS for reports*/
+CREATE OR REPLACE VIEW SchedulesByStation AS
+SELECT ts.*, s.station_id
+FROM TrainSchedule ts
+JOIN Schedule s        ON ts.trainschedule_id = s.id;
+
+/* customers on a line + date */
+CREATE OR REPLACE VIEW CustomersByLineDate AS
+SELECT DISTINCT c.*, ts.transit_id, DATE(r.departure_datetime) AS travel_date
+FROM Reservation r
+JOIN Customer     c  ON r.customer_id = c.customer_id
+JOIN TrainSchedule ts ON r.id = ts.trainschedule_id;
