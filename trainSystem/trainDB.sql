@@ -40,7 +40,7 @@ disc_rate FLOAT NOT NULL
 );
 
 CREATE TABLE Schedule(
-id CHAR(4) NOT NULL PRIMARY KEY,
+id CHAR(4) PRIMARY KEY,
 stop_num INT NOT NULL,
 station_id CHAR(4) NOT NULL,
 arrival_datetime  DATETIME NOT NULL,
@@ -69,7 +69,7 @@ pass VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE Reservation( 
-res_num  INT PRIMARY KEY,
+res_num INT PRIMARY KEY,
 res_date DATETIME NOT NULL,
 customer_id CHAR(4) NOT NULL,
 id CHAR(4) NOT NULL,
@@ -81,7 +81,7 @@ total_fare FLOAT NOT NULL,
 FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
 FOREIGN KEY (id) REFERENCES TrainSchedule(trainschedule_id),
 FOREIGN KEY (origin_id) REFERENCES TransitLine(origin_id),
-FOREIGN KEY (dest_id)REFERENCES Station(station_id)
+FOREIGN KEY (dest_id)REFERENCES TransitLine(station_id)
 );
 
 CREATE TABLE CustomerQuestions(
