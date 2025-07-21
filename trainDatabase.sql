@@ -56,7 +56,7 @@ create table Reservation(
  );
 insert into customer
 values
-	('dynamism', 'lexicalClarity', 'doyoureadthis@rutgers.edu', 'Julian', 'Long'),
+	('dynamism', 'lexicalClarity', 'jlong@rutgers.edu', 'Julian', 'Long'),
 	('wishful', 'WipeOutHD', 'arhuman@gmail.com', 'Arslan', 'Huey'),
     ('incredibleRed', 'jeeperscreepers', 'faithk@yahoo.com', 'Faith', 'Kojima'),
     ('wrenchforpeace', 'greenpost', 'aviationfan@outlook.com', 'Cyrus', 'Alexander');

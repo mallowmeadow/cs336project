@@ -6,10 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%
+session.invalidate();
+response.sendRedirect("index.jsp");
+%>
 <title>You have been logged out</title>
 </head>
 <body>
 	<h2>You have been logged out. Thank you for your business.</h2>
-	<a href="loginpage.jsp">Return to login page</a>
+	<a href="index.jsp">Return to login page</a>
 </body>
 </html>
