@@ -14,10 +14,15 @@
 	<h2>Login</h2>
     
 
-    <form method="post" action="LoginSuccess.jsp">
+    <form method="post" action="LoginCheck.jsp">
         Username: <input type="text" name="username" required /><br>
         Password: <input type="password" name="password" required /><br>
         <input type="submit" value="Login" />
     </form>
+    
+    Not registered? Register 
+    <a href="registerpage.jsp">here</a>.
+    
+    <a href="Admin/AdminDashboard.jsp">admin</a>
 </body>
 </html>
