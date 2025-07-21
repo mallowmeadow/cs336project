@@ -164,8 +164,8 @@ INSERT INTO CustomerQuestions(ques_id, customer_id, question, question_date) VAL
 
 INSERT INTO EmployeeReply(reply_id, ques_id, employee_ssn, reply, reply_date) VALUES
 ('R001','Q001','123456789','Seniors receive 35% off','2020-07-20 10:00:00'),
-('R002','Q002','456789012','Each passenger can bring a bag up to 40 lbs','2020-07-24 10:15:00'),
-('R003','Q003','678901234','There is free Wi-Fi on all trains','2020-07-26 13:00:00');
+('R002','Q002','098765432','Each passenger can bring a bag up to 40 lbs','2020-07-24 10:15:00'),
+('R003','Q003','246810123','There is free Wi-Fi on all trains','2020-07-26 13:00:00');
 
 /* helper VIEWS for reports*/
 CREATE OR REPLACE VIEW SchedulesByStation AS
