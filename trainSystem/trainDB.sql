@@ -138,20 +138,34 @@ INSERT INTO Schedule(schedule_id, stop_num, station_id, arrival_datetime, depart
 ('T456',2,'NYPN','2020-08-10 11:59:00','2020-08-10 11:59:00');
 
 INSERT INTO Customer(customer_id, first_name, last_name, email, username, pass) VALUES
-('0001','John','Smith','john.smith23@gmail.com','jsmith23','abc123');
+('0001','John','Smith','john.smith23@gmail.com','jsmith23','abc123'),
+('0002','Harry','Kane','bayern23@gmail.com','spurz22','eng123'),
+('0003','Duke','Deniss','amphs23@gmail.com','ddamp','amp1234'),
+('0004','Marcus','Rashford','mutdlegend15@gmail.com','mrash28','barca2025'),
+('0005','Jose','Mourinho','chosenone09@gmail.com','jmm23','jose456');
 
 INSERT INTO Employee(ssn, employee_firstname, employee_lastname, employee_role, username, pass) VALUES
 ('123456789','Tom','Cruz','Manager','tcruz24','tcruz24'),
-('012345678','Kobbie','Mainoo','Employee','MUTD13','kman23');
+('012345678','Kobbie','Mainoo','Employee','MUTD13','kman23'),
+('098765432','Bruno','Fernandes','Manager','MUTD19','bruno24'),
+('246810123','Ruben','Amorim','Manager','utd2025','ra2025');
 
 INSERT INTO Reservation(res_num, res_date, customer_id, schedule_id, origin_id, dest_id, departure_datetime, trip_type, total_fare) VALUES
-(123,'2020-07-22 00:00:00','0001','T456','NWBR','NYPN','2020-08-10 11:00:00','one-way',80.00);
+(123,'2020-07-22 00:00:00','0001','T456','NWBR','NYPN','2020-08-10 11:00:00','one-way',80.00),
+(124,'2020-07-27 00:00:00','0004','T123','PRIN','EDSN','2020-07-27 04:10:00','one-way',30.00),
+(125,'2020-07-28 00:00:00','0005','T456','NWBR','NYPN','2020-07-28 11:00:00','one-way',50.00),
+(136,'2020-07-29 00:00:00','0006','T123','EDSN','MTCN','2020-07-29 04:40:00','round-trip',60.00);
 
 INSERT INTO CustomerQuestions(ques_id, customer_id, question, question_date) VALUES
-('Q001','0001','How much off do seniors receive?','2020-07-20 09:15:00');
+('Q001','0001','How much off do seniors receive?','2020-07-20 09:15:00'),
+('Q002','0003','What is the bag weight?','2020-07-24 09:45:00'),
+('Q003','0005','Is Wi-Fi on the train?','2020-07-26 12:30:00');
+
 
 INSERT INTO EmployeeReply(reply_id, ques_id, employee_ssn, reply, reply_date) VALUES
-('R001','Q001','123456789','Seniors receive 35% off','2020-07-20 10:00:00');
+('R001','Q001','123456789','Seniors receive 35% off','2020-07-20 10:00:00'),
+('R002','Q002','456789012','Each passenger can bring a bag up to 40 lbs','2020-07-24 10:15:00'),
+('R003','Q003','678901234','There is free Wi-Fi on all trains','2020-07-26 13:00:00');
 
 /* helper VIEWS for reports*/
 CREATE OR REPLACE VIEW SchedulesByStation AS
