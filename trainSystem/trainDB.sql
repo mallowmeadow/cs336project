@@ -144,12 +144,6 @@ INSERT INTO Employee(ssn, employee_firstname, employee_lastname, employee_role, 
 ('123456789','Tom','Cruz','Manager','tcruz24','tcruz24'),
 ('012345678','Kobbie','Mainoo','Employee','MUTD13','kman23');
 
-INSERT INTO Customer(customer_id, first_name, last_name, email, username, pass) VALUES
-('0002', 'Julian', 'Long',  'jlong@rutgers.edu', 'dynamism', 'lexicalClarity'),
-('0003', 'Arslan', 'Huey', 'arhuman@gmail.com', 'wishful', 'WipeOutHD'),
-('0004', 'Faith', 'Kojima', 'faithk@yahoo.com', 'incredibleRed', 'jeeperscreepers'),
-('0005', 'Cyrus', 'Alexander', 'aviationfan@outlook.com', 'wrenchforpeace', 'greenpost');
-
 INSERT INTO Reservation(res_num, res_date, customer_id, schedule_id, origin_id, dest_id, departure_datetime, trip_type, total_fare) VALUES
 (123,'2020-07-22 00:00:00','0001','T456','NWBR','NYPN','2020-08-10 11:00:00','one-way',80.00);
 
